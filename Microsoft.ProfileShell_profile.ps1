@@ -1,3 +1,11 @@
+function prompt {
+    "PS $($executionContext.SessionState.Path.CurrentLocation)$(':' * ($nestedPromptLevel + 1)) 
+> ";
+    # .Link
+    # https://go.microsoft.com/fwlink/?LinkID=225750
+    # .ExternalHelp System.Management.Automation.dll-help.xml
+  }
+
 Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {
     param($wordToComplete, $commandAst, $cursorPosition)
     [Console]::InputEncoding = [Console]::OutputEncoding = $OutputEncoding = [System.Text.Utf8Encoding]::new()
@@ -8,35 +16,6 @@ Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {
     }
 }
 
-function Update-PowerShell {
-    if (-not $global:canConnectToGitHub) {
-        Write-Host "Skipping PowerShell update check due to GitHub.com not responding within 1 second." -ForegroundColor Yellow
-        return
-    }
-
-    try {
-        Write-Host "Checking for PowerShell updates..." -ForegroundColor Cyan
-        $updateNeeded = $false
-        $currentVersion = $PSVersionTable.PSVersion.ToString()
-        $gitHubApiUrl = "https://api.github.com/repos/PowerShell/PowerShell/releases/latest"
-        $latestReleaseInfo = Invoke-RestMethod -Uri $gitHubApiUrl
-        $latestVersion = $latestReleaseInfo.tag_name.Trim('v')
-        if ($currentVersion -lt $latestVersion) {
-            $updateNeeded = $true
-        }
-
-        if ($updateNeeded) {
-            Write-Host "Updating PowerShell..." -ForegroundColor Yellow
-            winget upgrade "Microsoft.PowerShell" --accept-source-agreements --accept-package-agreements
-            Write-Host "PowerShell has been updated. Please restart your shell to reflect changes" -ForegroundColor Magenta
-        } else {
-            Write-Host "Your PowerShell is up to date." -ForegroundColor Green
-        }
-    } catch {
-        Write-Error "Failed to update PowerShell. Error: $_"
-    }
-}
-Update-PowerShell
 function git-daily {
     param (
         [Parameter(Mandatory=$False)]
@@ -48,32 +27,36 @@ function git-daily {
     git commit -m $message
     git push
 }
-# add path C:\Users\wbalconi\AppData\Local\Programs\oh-my-posh\bin\oh-my-posh.exe
-$env:Path += ";C:\Users\wweeks\workspace\powershell\config\oh-my-posh\bin"
-oh-my-posh init pwsh --config "https://raw.githubusercontent.com/Acestus/oh-my-posh/main/themes/night_owl02.json" | Invoke-Expression
-Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
+# 
+#add path C:\Users\wbalconi\AppData\Local\Programs\oh-my-posh\bin\oh-my-posh.exe
+# $env:Path += ";C:\Users\wbalconi\AppData\Local\Programs\oh-my-posh\bin"
+# oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\my-posh04.omp.json" | Invoke-Expression
+
+#Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
 # Import the Chocolatey Profile that contains the necessary code to enable
 # tab-completions to function for `choco`.
 # Be aware that if you are missing these lines from your profile, tab completion
 # for `choco` will not function.
 # See https://ch0.co/tab-completion for details.
-$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
-if (Test-Path($ChocolateyProfile)) {
-  Import-Module "$ChocolateyProfile"
-}
+#$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+#if (Test-Path($ChocolateyProfile)) {
+#  Import-Module "$ChocolateyProfile"
+#}
 
+$env:Path += "C:\Program Files\nvim\bin"
 ### Transcript Section ###
 # used to setup automated transcript start when PowerShell starts
 
 ## Transcript Section Variables ##
 # On Windows, I like to put it in the C drive directly.
 
-$TranscriptDir = "/mnt/c/transcripts/"
+$TranscriptDir = "C:\Users\wweeks\OneDrive - Reprise Financial\Documents\transcripts\"
 
 # transcript log sets up the file's name. It will tell you:
 # - the computer the transcript came from
 # - the user's PowerShell session that is recordedf
 # - the day the transcript was made
+
 $TranscriptLog = (hostname)+"_"+$env:USERNAME+"_"+(Get-Date -UFormat "%Y-%m-%d")
 
 # Transcript Path is the full path and file name of the transcript log.
@@ -101,8 +84,16 @@ function connect {
     $vmResourceGroupName = get-azvm -Name $vmName | select -ExpandProperty ResourceGroupName
     $vmResourceId = (Get-AzVM -Name $vmName -ResourceGroupName $vmResourceGroupName).Id
     Write-Host "Connecting to $vmName in $vmResourceGroupName"
-    az network bastion rdp --name "" --resource-group "" --target-resource-id $vmResourceId
+    az network bastion rdp --name $bastionName --resource-group $vmResourceGroupName --target-resource-id $vmResourceId
 }
 
 # get vm with the name busafs
+
+# Oh my Posh
+$env:Path += ";C:\Users\user\AppData\Local\Programs\oh-my-posh\bin"
+
+$env:Path += ";C:\apps\terraform"
+$env:Path += ";C:\apps\opentofu"
+$env:Path += ";C:\apps\aztfexport"
+$env:Path += ";C:\q\w64"
 
