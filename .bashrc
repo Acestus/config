@@ -161,3 +161,6 @@ export NVM_DIR="$HOME/.nvm"
 eval "$(/home/william/.local/bin/oh-my-posh init bash --config '~/.config/oh-my-posh/night-owl02.json')"
 LS_COLORS=$LS_COLORS:"ow=36"
 export LS_COLORS
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"

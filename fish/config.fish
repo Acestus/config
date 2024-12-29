@@ -9,7 +9,7 @@ alias ls="lsd -F"
 alias la="lsd -AF"
 alias ll="lsd -lAF"
 alias lg="lsd -F --group-dirs=first"
-alias oh-my-posh='/home/acestus/.local/bin/oh-my-posh'
+alias oh-my-posh='/home/acetus/.local/bin/oh-my-posh'
 #oh-my-posh init fish | source
 
 # Functions
