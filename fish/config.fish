@@ -9,8 +9,8 @@ alias ls="lsd -F"
 alias la="lsd -AF"
 alias ll="lsd -lAF"
 alias lg="lsd -F --group-dirs=first"
-alias oh-my-posh='/home/acetus/.local/bin/oh-my-posh'
-#oh-my-posh init fish | source
+alias oh-my-posh='~/.local/bin/oh-my-posh'
+oh-my-posh init fish --config ~/.config/oh-my-posh/night-owl02.json | source
 
 # Functions
 function gd
@@ -20,7 +20,7 @@ function gd
 end
 
 function dn
-    set dir "/home/acestus/git/workspace24/md/planner/"
+    set dir "~/git/workspace24/md/planner/"
     cd "$dir" || return
     set filename (date +"%m-%d").md
     touch "$filename"

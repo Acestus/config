@@ -10,6 +10,7 @@ sudo apt install -y libsqlite3-dev libffi-dev libbz2-dev
 curl -sS https://webi.sh/powershell | sh; 
 curl -sS https://webi.sh/lsd | sh;
 curl -sS https://webi.sh/pyenv | sh;
+curl -sS https://webi.sh/nerdfont | sh;
 source ~/.config/envman/PATH.env
 curl -s https://ohmyposh.dev/install.sh | bash -s
 rm -rf ~/.bashrc
