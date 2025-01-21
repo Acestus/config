@@ -36,3 +36,7 @@ end
 
 # Generated for envman. Do not edit.
 test -s ~/.config/envman/load.fish; and source ~/.config/envman/load.fish
+
+# added by Webi for pyenv
+status is-login; and pyenv init --path | source
+status is-interactive; and pyenv init - | source
