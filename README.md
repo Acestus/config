@@ -1,5 +1,5 @@
 ```bash
-export $user=red
+# export $user=red
 mkdir git
 cd git
 git clone git@github.com:Acestus/workspace24.git
@@ -25,5 +25,5 @@ rm -rf ~/.config/fish
 ln -s ~/git/config/fish ~/.config/fish
 rm -rf ~/.config/oh-my-posh
 ln -s ~/git/config/oh-my-posh ~/.config/oh-my-posh
-ln -s ~/git/config/Microsoft.PowerShell_profile.ps1 /home/$user/.config/powershell/Microsoft.PowerShell_profile.ps1
+# ln -s ~/git/config/Microsoft.PowerShell_profile.ps1 /home/$user/.config/powershell/Microsoft.PowerShell_profile.ps1
 ```
