@@ -4,15 +4,6 @@ end
 
 set -U fish_greeting
 
-<<<<<<< HEAD
-#Aliases
-alias ls="lsd -F"
-alias la="lsd -AF"
-alias ll="lsd -lAF"
-alias lg="lsd -F --group-dirs=first"
-alias oh-my-posh='~/.local/bin/oh-my-posh'
-oh-my-posh init fish --config ~/.config/oh-my-posh/night-owl02.json | source
-=======
 # File System Navigation
 abbr -a ls 'lsd -F'
 abbr -a la 'lsd -AF'
@@ -31,7 +22,6 @@ export PATH="$HOME/gems/bin:$PATH"
 
 oh-my-posh init fish --config ~/git/config/oh-my-posh/night-owl02.json | source
 
->>>>>>> f902226 (Daily Commit)
 
 # Functions
 function git-daily
@@ -40,15 +30,10 @@ function git-daily
     git push
 end
 
-<<<<<<< HEAD
-function dn
-    set dir "~/git/workspace24/md/planner/"
-=======
 abbr -a gd 'git-daily'
 
 function daily-note
     set dir "/home/acestus/git/workspace24/md/planner/"
->>>>>>> f902226 (Daily Commit)
     cd "$dir" || return
     set filename (date +"%m-%d").md
     touch "$filename"
