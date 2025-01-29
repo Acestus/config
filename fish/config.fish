@@ -4,6 +4,7 @@ end
 
 set -U fish_greeting
 
+<<<<<<< HEAD
 #Aliases
 alias ls="lsd -F"
 alias la="lsd -AF"
@@ -11,16 +12,43 @@ alias ll="lsd -lAF"
 alias lg="lsd -F --group-dirs=first"
 alias oh-my-posh='~/.local/bin/oh-my-posh'
 oh-my-posh init fish --config ~/.config/oh-my-posh/night-owl02.json | source
+=======
+# File System Navigation
+abbr -a ls 'lsd -F'
+abbr -a la 'lsd -AF'
+abbr -a ll 'lsd -lAF'
+abbr -a lg 'lsd -F --group-dirs=first'
+abbr -a tree 'lsd -AF --tree'
+
+# Development Tools
+abbr -a tf 'terraform'
+abbr -a gl 'git --no-pager log --decorate=full --oneline'
+
+alias oh-my-posh='/home/acestus/.local/bin/oh-my-posh'
+
+export GEM_HOME="$HOME/gems"
+export PATH="$HOME/gems/bin:$PATH"
+
+oh-my-posh init fish --config ~/git/config/oh-my-posh/night-owl02.json | source
+
+>>>>>>> f902226 (Daily Commit)
 
 # Functions
-function gd
+function git-daily
     git add .
     git commit -m "Daily Commit"
     git push
 end
 
+<<<<<<< HEAD
 function dn
     set dir "~/git/workspace24/md/planner/"
+=======
+abbr -a gd 'git-daily'
+
+function daily-note
+    set dir "/home/acestus/git/workspace24/md/planner/"
+>>>>>>> f902226 (Daily Commit)
     cd "$dir" || return
     set filename (date +"%m-%d").md
     touch "$filename"
@@ -32,6 +60,8 @@ function dn
 
     nvim "$filename"
 end
+
+abbr -a dn 'daily-note'
 
 
 # Generated for envman. Do not edit.
